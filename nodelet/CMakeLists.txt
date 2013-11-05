@@ -7,6 +7,8 @@ find_package(catkin REQUIRED bondcpp message_generation pluginlib rosconsole ros
 ## Find Boost (only headers)
 find_package(Boost REQUIRED)
 
+find_package(uuid REQUIRED)
+
 ## Add service files to be generated
 add_service_files(DIRECTORY srv FILES NodeletList.srv  NodeletLoad.srv  NodeletUnload.srv)
 
@@ -20,7 +22,7 @@ catkin_package(
   DEPENDS Boost
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${BOOST_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${BOOST_INCLUDE_DIRS} ${uuid_INCLUDE_DIRS})
 
 # Debug only, collects stats on how callbacks are doled out to worker threads
 #add_definitions(-DNODELET_QUEUE_DEBUG)
@@ -30,7 +32,7 @@ target_link_libraries(nodeletlib ${catkin_LIBRARIES} ${BOOST_LIBRARIES})
 add_dependencies(nodeletlib ${nodelet_EXPORTED_TARGETS})
 
 add_executable(nodelet src/nodelet.cpp)
-target_link_libraries(nodelet nodeletlib uuid ${catkin_LIBRARIES} ${BOOST_LIBRARIES})
+target_link_libraries(nodelet nodeletlib uuid ${catkin_LIBRARIES} ${BOOST_LIBRARIES} ${uuid_LIBRARIES})
 
 # install
 install(DIRECTORY include/${PROJECT_NAME}/
