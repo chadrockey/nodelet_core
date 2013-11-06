@@ -5,4 +5,3 @@ project(test_nodelet)
 find_package(catkin REQUIRED)
 catkin_package()
 
-endif()
