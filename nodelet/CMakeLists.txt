@@ -17,7 +17,7 @@ generate_messages(DEPENDENCIES std_msgs)
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES nodeletlib uuid
+  LIBRARIES nodeletlib ${uuid_LIBRARIES}
   CATKIN_DEPENDS bondcpp message_runtime pluginlib rosconsole roscpp std_msgs
   DEPENDS Boost
 )
@@ -32,7 +32,7 @@ target_link_libraries(nodeletlib ${catkin_LIBRARIES} ${BOOST_LIBRARIES})
 add_dependencies(nodeletlib ${nodelet_EXPORTED_TARGETS})
 
 add_executable(nodelet src/nodelet.cpp)
-target_link_libraries(nodelet nodeletlib uuid ${catkin_LIBRARIES} ${BOOST_LIBRARIES} ${uuid_LIBRARIES})
+target_link_libraries(nodelet nodeletlib ${catkin_LIBRARIES} ${BOOST_LIBRARIES} ${uuid_LIBRARIES})
 
 # install
 install(DIRECTORY include/${PROJECT_NAME}/
